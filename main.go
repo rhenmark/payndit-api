@@ -1,7 +1,9 @@
 package main
 
 import (
+	"cmp"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -28,7 +30,9 @@ func main() {
 	router.GET("/welcome", welcome)
 	router.GET("/refresh", refresh)
 
-	router.Run("localhost:8080")
+	port := cmp.Or(os.Getenv("PORT"), "8080")
+
+	router.Run("localhost:" + port)
 }
 
 // Define the secret key used for signing the JWT.
